@@ -16,7 +16,7 @@ Finally, training is performed with the `rbpnet train` command.
 
 ### 1. Creating a `dataspec.yml`
 
-For an example, check out [examples/dataspec.yml](https://github.com/mhorlacher/rbpnet/blob/main/examples/data/dataspec.yml). 
+For an example, check out [examples/QKI.dataspec.yml](https://github.com/mhorlacher/rbpnet/blob/main/examples/QKI.dataspec.yml). 
 
 
 ### 2. Creating a TFRecord file
@@ -116,6 +116,3 @@ chr8	38262758	+	C	A
 chr9	83969990	-	A	C
 ```
 
----
-
-For non-CLI usage, see the [examples/example.ipynb](https://github.com/mhorlacher/rbpnet/blob/main/examples/example.ipynb) notebook. 
