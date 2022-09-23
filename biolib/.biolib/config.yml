@@ -1,0 +1,142 @@
+biolib_version: 2
+
+modules:
+    main:
+        image: 'local-docker://rbpnet:latest'
+        command: python /rbpnet/biolib/predict.py --output predictions.fasta.rbpnet
+        working_directory: /home/biolib/
+        input_files:
+            - COPY / /home/biolib/
+        output_files:
+            - COPY /home/biolib/predictions.fasta.rbpnet /
+        source_files:
+            - COPY /example.fasta /home/biolib/example.fasta
+
+
+arguments:
+    # model
+    -   key: --model
+        description: 'Select target RBP'
+        key_value_separator: ' '
+        default_value: ''
+        type: dropdown
+        # options:
+        #     'QKI-HepG2': '/rbpnet/models/QKI_HepG2.model.h5'
+        #     'RBFOX2-HepG2': '/rbpnet/models/RBFOX2_HepG2.model.h5'
+        options:
+            'PRPF8_HepG2': '/rbpnet/models/PRPF8_HepG2.model.h5'
+            'UCHL5_HepG2': '/rbpnet/models/UCHL5_HepG2.model.h5'
+            'GRSF1_HepG2': '/rbpnet/models/GRSF1_HepG2.model.h5'
+            'SF3B4_HepG2': '/rbpnet/models/SF3B4_HepG2.model.h5'
+            'POLR2G_HepG2': '/rbpnet/models/POLR2G_HepG2.model.h5'
+            'MATR3_HepG2': '/rbpnet/models/MATR3_HepG2.model.h5'
+            'HNRNPC_HepG2': '/rbpnet/models/HNRNPC_HepG2.model.h5'
+            'BUD13_HepG2': '/rbpnet/models/BUD13_HepG2.model.h5'
+            'PABPN1_HepG2': '/rbpnet/models/PABPN1_HepG2.model.h5'
+            'TROVE2_HepG2': '/rbpnet/models/TROVE2_HepG2.model.h5'
+            'SLTM_HepG2': '/rbpnet/models/SLTM_HepG2.model.h5'
+            'IGF2BP3_HepG2': '/rbpnet/models/IGF2BP3_HepG2.model.h5'
+            'SUB1_HepG2': '/rbpnet/models/SUB1_HepG2.model.h5'
+            'SAFB_HepG2': '/rbpnet/models/SAFB_HepG2.model.h5'
+            'SRSF1_HepG2': '/rbpnet/models/SRSF1_HepG2.model.h5'
+            'LSM11_HepG2': '/rbpnet/models/LSM11_HepG2.model.h5'
+            'PRPF4_HepG2': '/rbpnet/models/PRPF4_HepG2.model.h5'
+            'EIF3D_HepG2': '/rbpnet/models/EIF3D_HepG2.model.h5'
+            'SRSF9_HepG2': '/rbpnet/models/SRSF9_HepG2.model.h5'
+            'AGGF1_HepG2': '/rbpnet/models/AGGF1_HepG2.model.h5'
+            'DDX6_HepG2': '/rbpnet/models/DDX6_HepG2.model.h5'
+            'KHSRP_HepG2': '/rbpnet/models/KHSRP_HepG2.model.h5'
+            'U2AF2_HepG2': '/rbpnet/models/U2AF2_HepG2.model.h5'
+            'TRA2A_HepG2': '/rbpnet/models/TRA2A_HepG2.model.h5'
+            'ZNF800_HepG2': '/rbpnet/models/ZNF800_HepG2.model.h5'
+            'HLTF_HepG2': '/rbpnet/models/HLTF_HepG2.model.h5'
+            'RBM5_HepG2': '/rbpnet/models/RBM5_HepG2.model.h5'
+            'LIN28B_HepG2': '/rbpnet/models/LIN28B_HepG2.model.h5'
+            'STAU2_HepG2': '/rbpnet/models/STAU2_HepG2.model.h5'
+            'DKC1_HepG2': '/rbpnet/models/DKC1_HepG2.model.h5'
+            'SUGP2_HepG2': '/rbpnet/models/SUGP2_HepG2.model.h5'
+            'ZC3H11A_HepG2': '/rbpnet/models/ZC3H11A_HepG2.model.h5'
+            'TIA1_HepG2': '/rbpnet/models/TIA1_HepG2.model.h5'
+            'CSTF2T_HepG2': '/rbpnet/models/CSTF2T_HepG2.model.h5'
+            'U2AF1_HepG2': '/rbpnet/models/U2AF1_HepG2.model.h5'
+            'HNRNPU_HepG2': '/rbpnet/models/HNRNPU_HepG2.model.h5'
+            'SF3A3_HepG2': '/rbpnet/models/SF3A3_HepG2.model.h5'
+            'GRWD1_HepG2': '/rbpnet/models/GRWD1_HepG2.model.h5'
+            'DDX3X_HepG2': '/rbpnet/models/DDX3X_HepG2.model.h5'
+            'DDX55_HepG2': '/rbpnet/models/DDX55_HepG2.model.h5'
+            'CDC40_HepG2': '/rbpnet/models/CDC40_HepG2.model.h5'
+            'FASTKD2_HepG2': '/rbpnet/models/FASTKD2_HepG2.model.h5'
+            'LARP4_HepG2': '/rbpnet/models/LARP4_HepG2.model.h5'
+            'FKBP4_HepG2': '/rbpnet/models/FKBP4_HepG2.model.h5'
+            'DGCR8_HepG2': '/rbpnet/models/DGCR8_HepG2.model.h5'
+            'DHX30_HepG2': '/rbpnet/models/DHX30_HepG2.model.h5'
+            'FUBP3_HepG2': '/rbpnet/models/FUBP3_HepG2.model.h5'
+            'G3BP1_HepG2': '/rbpnet/models/G3BP1_HepG2.model.h5'
+            'XRCC6_HepG2': '/rbpnet/models/XRCC6_HepG2.model.h5'
+            'HNRNPM_HepG2': '/rbpnet/models/HNRNPM_HepG2.model.h5'
+            'TAF15_HepG2': '/rbpnet/models/TAF15_HepG2.model.h5'
+            'FUS_HepG2': '/rbpnet/models/FUS_HepG2.model.h5'
+            'PPIG_HepG2': '/rbpnet/models/PPIG_HepG2.model.h5'
+            'QKI_HepG2': '/rbpnet/models/QKI_HepG2.model.h5'
+            'SFPQ_HepG2': '/rbpnet/models/SFPQ_HepG2.model.h5'
+            'CSTF2_HepG2': '/rbpnet/models/CSTF2_HepG2.model.h5'
+            'EFTUD2_HepG2': '/rbpnet/models/EFTUD2_HepG2.model.h5'
+            'UTP18_HepG2': '/rbpnet/models/UTP18_HepG2.model.h5'
+            'WDR43_HepG2': '/rbpnet/models/WDR43_HepG2.model.h5'
+            'SDAD1_HepG2': '/rbpnet/models/SDAD1_HepG2.model.h5'
+            'LARP7_HepG2': '/rbpnet/models/LARP7_HepG2.model.h5'
+            'EXOSC5_HepG2': '/rbpnet/models/EXOSC5_HepG2.model.h5'
+            'NOL12_HepG2': '/rbpnet/models/NOL12_HepG2.model.h5'
+            'YBX3_HepG2': '/rbpnet/models/YBX3_HepG2.model.h5'
+            'GTF2F1_HepG2': '/rbpnet/models/GTF2F1_HepG2.model.h5'
+            'ILF3_HepG2': '/rbpnet/models/ILF3_HepG2.model.h5'
+            'SRSF7_HepG2': '/rbpnet/models/SRSF7_HepG2.model.h5'
+            'FAM120A_HepG2': '/rbpnet/models/FAM120A_HepG2.model.h5'
+            'AKAP1_HepG2': '/rbpnet/models/AKAP1_HepG2.model.h5'
+            'XRN2_HepG2': '/rbpnet/models/XRN2_HepG2.model.h5'
+            'PCBP2_HepG2': '/rbpnet/models/PCBP2_HepG2.model.h5'
+            'DDX59_HepG2': '/rbpnet/models/DDX59_HepG2.model.h5'
+            'SMNDC1_HepG2': '/rbpnet/models/SMNDC1_HepG2.model.h5'
+            'PTBP1_HepG2': '/rbpnet/models/PTBP1_HepG2.model.h5'
+            'HNRNPUL1_HepG2': '/rbpnet/models/HNRNPUL1_HepG2.model.h5'
+            'NKRF_HepG2': '/rbpnet/models/NKRF_HepG2.model.h5'
+            'BCCIP_HepG2': '/rbpnet/models/BCCIP_HepG2.model.h5'
+            'TBRG4_HepG2': '/rbpnet/models/TBRG4_HepG2.model.h5'
+            'RBM22_HepG2': '/rbpnet/models/RBM22_HepG2.model.h5'
+            'SND1_HepG2': '/rbpnet/models/SND1_HepG2.model.h5'
+            'SSB_HepG2': '/rbpnet/models/SSB_HepG2.model.h5'
+            'IGF2BP1_HepG2': '/rbpnet/models/IGF2BP1_HepG2.model.h5'
+            'SUPV3L1_HepG2': '/rbpnet/models/SUPV3L1_HepG2.model.h5'
+            'EIF3H_HepG2': '/rbpnet/models/EIF3H_HepG2.model.h5'
+            'BCLAF1_HepG2': '/rbpnet/models/BCLAF1_HepG2.model.h5'
+            'FXR2_HepG2': '/rbpnet/models/FXR2_HepG2.model.h5'
+            'RBM15_HepG2': '/rbpnet/models/RBM15_HepG2.model.h5'
+            'DDX52_HepG2': '/rbpnet/models/DDX52_HepG2.model.h5'
+            'AQR_HepG2': '/rbpnet/models/AQR_HepG2.model.h5'
+            'PCBP1_HepG2': '/rbpnet/models/PCBP1_HepG2.model.h5'
+            'NCBP2_HepG2': '/rbpnet/models/NCBP2_HepG2.model.h5'
+            'UPF1_HepG2': '/rbpnet/models/UPF1_HepG2.model.h5'
+            'FTO_HepG2': '/rbpnet/models/FTO_HepG2.model.h5'
+            'HNRNPA1_HepG2': '/rbpnet/models/HNRNPA1_HepG2.model.h5'
+            'HNRNPL_HepG2': '/rbpnet/models/HNRNPL_HepG2.model.h5'
+            'RBFOX2_HepG2': '/rbpnet/models/RBFOX2_HepG2.model.h5'
+            'RPS3_HepG2': '/rbpnet/models/RPS3_HepG2.model.h5'
+            'TIAL1_HepG2': '/rbpnet/models/TIAL1_HepG2.model.h5'
+            'NOLC1_HepG2': '/rbpnet/models/NOLC1_HepG2.model.h5'
+            'DROSHA_HepG2': '/rbpnet/models/DROSHA_HepG2.model.h5'
+            'XPO5_HepG2': '/rbpnet/models/XPO5_HepG2.model.h5'
+            'NIP7_HepG2': '/rbpnet/models/NIP7_HepG2.model.h5'
+            'HNRNPK_HepG2': '/rbpnet/models/HNRNPK_HepG2.model.h5'
+            
+        required: true
+
+    # fasta
+    -   key: --fasta
+        description: 'Select FASTA sequences to predict on.'
+        key_value_separator: ' '
+        default_value: 'example.fasta'
+        type: text-file
+        required: true
+    
+
+license_file: LICENSE

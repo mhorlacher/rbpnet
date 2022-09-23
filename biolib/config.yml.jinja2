@@ -1,0 +1,41 @@
+biolib_version: 2
+
+modules:
+    main:
+        image: 'local-docker://rbpnet:latest'
+        command: python /rbpnet/biolib/predict.py --output predictions.fasta.rbpnet
+        working_directory: /home/biolib/
+        input_files:
+            - COPY / /home/biolib/
+        output_files:
+            - COPY /home/biolib/predictions.fasta.rbpnet /
+        source_files:
+            - COPY /example.fasta /home/biolib/example.fasta
+
+
+arguments:
+    # model
+    -   key: --model
+        description: 'Select target RBP'
+        key_value_separator: ' '
+        default_value: ''
+        type: dropdown
+        # options:
+        #     'QKI-HepG2': '/rbpnet/models/QKI_HepG2.model.h5'
+        #     'RBFOX2-HepG2': '/rbpnet/models/RBFOX2_HepG2.model.h5'
+        options:
+            {% for x in RBP_CELL -%}
+                '{{ x }}': '/rbpnet/models/{{ x }}.model.h5'
+            {% endfor %}
+        required: true
+
+    # fasta
+    -   key: --fasta
+        description: 'Select FASTA sequences to predict on.'
+        key_value_separator: ' '
+        default_value: 'example.fasta'
+        type: text-file
+        required: true
+    
+
+license_file: LICENSE
