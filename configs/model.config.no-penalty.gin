@@ -1,0 +1,71 @@
+import tensorflow as tf
+
+from rbpnet import models
+from rbpnet import losses
+from rbpnet import metrics
+from rbpnet import layers
+from rbpnet import functions
+from rbpnet import callbacks
+from rbpnet import penalties
+
+### Train ###
+train.batch_size = 128
+train.epochs = 50
+train.cache = True
+train.shuffle = 1_000_000
+train.use_bias = %use_bias
+train.callbacks = [@callbacks.LRAdjustFactor(), @tf.keras.callbacks.EarlyStopping()]
+train.profile_loss = @losses.multinomial_loss
+train.profile_loss_bias_weight = 1.0
+train.profile_metrics = [@metrics.PearsonCorrelation]
+train.optimizer = @tf.keras.optimizers.Adam()
+
+# Optimizer
+tf.keras.optimizers.Adam.learning_rate = 0.004
+
+## Callbacks
+# LR Schedule
+callbacks.LRAdjustFactor.factor = 0.5
+callbacks.LRAdjustFactor.patience = 6
+
+# Early Stopping
+tf.keras.callbacks.EarlyStopping.patience =  10
+
+### Model ###
+train.model = @models.RBPNet
+
+models.RBPNet.conv_layers = 9
+models.RBPNet.dilation = True
+models.RBPNet.use_bias = %use_bias
+models.RBPNet.target_bias_layer = @layers.AdditiveTargetBias
+models.RBPNet.mixing_coeff_layer = @layers.SequenceAdditiveMixingCoefficient
+
+# Metrics
+metrics.PearsonCorrelation.post_proc_fn = @functions.logits_to_expected_counts
+
+### Layers ###
+activation = 'relu'
+
+# Penalty
+layers.AdditiveTargetBias.penalty = @penalties.JSDPenalty
+layers.AdditiveTargetBias.stop_bias_gradient = False
+penalties.JSDPenalty.weight = 0.0
+
+# BodyConv
+layers.BodyConv.dropout_rate = 0.25
+layers.BodyConv.batch_norm = True
+layers.BodyConv.residual = True
+layers.BodyConv.filters = 128
+layers.BodyConv.kernel_size = 6
+
+# FirstLayerConv
+layers.FirstLayerConv.filters = 128
+layers.FirstLayerConv.kernel_size = 12
+layers.FirstLayerConv.use_bias = True
+
+# ProfileHead
+layers.ProfileHead.kernel_size = 20
+layers.ProfileHead.use_bias = True
+
+### Bias ###
+use_bias = True
