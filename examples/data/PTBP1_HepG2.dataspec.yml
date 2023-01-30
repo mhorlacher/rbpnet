@@ -1,0 +1,12 @@
+fasta_file: meta/grch38.chr19.fasta
+
+task_specs:  
+
+  PTBP1_HepG2:
+    main:
+      - signal/PTBP1_HepG2/eCLIP/counts.pos.bw # plus-strand bigWig
+      - signal/PTBP1_HepG2/eCLIP/counts.neg.bw # minus-strand bigWig
+    control:
+      - signal/PTBP1_HepG2/control/counts.pos.bw
+      - signal/PTBP1_HepG2/control/counts.neg.bw
+    peaks: peaks/PTBP1_HepG2/peaks.crosslink.chr19.bed # single-nucleotide positions

@@ -214,7 +214,7 @@ class Sample:
 
         feature = dict()
         feature['name'] = _bytes_features([self.name.encode('UTF-8')])
-        feature['score'] = _float_feature(np.array(self.score, dtype=np.float32))
+        feature['score'] = _float_feature(self.score)
         feature['sequence'] = _bytes_features([tf.io.serialize_tensor(self.sequence).numpy()])
 
         for profile_name, profile in self.profiles.items():
