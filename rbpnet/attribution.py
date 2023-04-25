@@ -3,7 +3,7 @@ import tensorflow as tf
 import igrads
 
 # %%
-def attribution(inputs, model):
+def attribution(inputs, model, atype='IG', steps=50):
     """Compute sequence attribution(s) for a given model and inputs.
 
     Args:
@@ -15,4 +15,9 @@ def attribution(inputs, model):
     """
     
     pred = model.predict(tf.expand_dims(inputs, axis=0))
-    return igrads.integrated_gradients(inputs, model, target_mask=pred)
+    if atype == 'atype':
+        return igrads.integrated_gradients(inputs, model, target_mask=pred, steps=steps)
+    elif atype == 'grad_x_input':
+        return igrads.grad_x_input(inputs, model, target_mask=pred)
+    else:
+        raise ValueError(f'Unrecognized attribution type {atype}.')
