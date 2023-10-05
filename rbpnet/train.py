@@ -110,17 +110,20 @@ def train(
     print(train_dataset.element_spec)
 
     # load val data (optional)
-    if val_data:
+    print('Validation Dataset:')
+    if val_data is not None:
         val_data = Data(val_data, dataspec, use_bias)
         val_dataset = val_data.dataset(batch_size=batch_size, shuffle=0, cache=cache)
         val_dataset = val_dataset.map(lambda X, Y: (soft_subset_dict(X, model.input_names), soft_subset_dict(Y, model.output_names)))
-        print('Validation Dataset:')
         print(val_dataset.element_spec)
     else:
+        print('NONE')
         val_dataset = None
     
     # create logging-callbacks and add to optional custom callbacks
     callbacks += (make_callbacks(output) if output is not None else [])
+    print('Callbacks:')
+    print(callbacks)
 
     # create metrics and loss
     loss, loss_weight = create_loss(dataspec.tasks, profile_loss, use_bias=use_bias, bias_weight=profile_loss_bias_weight)
@@ -137,7 +140,7 @@ def train(
         model.save(str(output / 'model.h5'))
 
     # save best validation loss result
-    if val_data:
+    if val_data is not None:
         min_val_loss = str(round(min(history.history['val_loss']), 4))
         with open(str(output.parent / 'result'), 'w') as f:
             print(min_val_loss, end='', file=f)
