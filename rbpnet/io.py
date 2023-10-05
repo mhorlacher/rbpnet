@@ -108,7 +108,7 @@ class Track:
         else:
             raise ValueError(f'Unspected strand: {strand}')
 
-        profile = bigWig.values(chrom, start, end)
+        profile = bigWig.values(str(chrom), start, end)
         profile = [nan_to_zero(c) for c in profile]
 
         if strand == '-' and reverse:
@@ -214,7 +214,8 @@ class Sample:
 
         feature = dict()
         feature['name'] = _bytes_features([self.name.encode('UTF-8')])
-        feature['score'] = _float_feature(self.score)
+        # feature['score'] = _float_feature(np.array(self.score, dtype=np.float32))
+        feature['score'] = _float_feature(float(self.score))
         feature['sequence'] = _bytes_features([tf.io.serialize_tensor(self.sequence).numpy()])
 
         for profile_name, profile in self.profiles.items():

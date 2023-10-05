@@ -26,7 +26,7 @@ class PearsonCorrelation(tf.keras.metrics.Mean):
     
     def _compute_correlation(self, y, y_pred):
         # sample_axis = batch-axis
-        corr = tfp.stats.correlation(y, y_pred, sample_axis=0, event_axis=None)
+        corr = tfp.stats.correlation(y, y_pred, sample_axis=-1, event_axis=None)
         return corr
 
     def _nan_to_zero(self, x):

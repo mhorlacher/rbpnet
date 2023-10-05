@@ -29,10 +29,11 @@ def RBPNet(
     dilation=True, 
     use_bias=True, 
     target_bias_layer=rlayers.AdditiveTargetBias, 
-    mixing_coeff_layer=rlayers.SequenceAdditiveMixingCoefficient):
+    mixing_coeff_layer=rlayers.SequenceAdditiveMixingCoefficient,
+    input_channels=4):
 
     # input
-    x_in = layers.Input(shape=(None, 4), name='sequence')
+    x_in = layers.Input(shape=(None, input_channels), name='sequence')
 
     # body
     x = rlayers.FirstLayerConv()(x_in)
