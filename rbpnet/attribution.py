@@ -15,7 +15,7 @@ def attribution(inputs, model, atype='IG', steps=50):
     """
     
     pred = model.predict(tf.expand_dims(inputs, axis=0))
-    if atype == 'atype':
+    if atype == 'IG':
         return igrads.integrated_gradients(inputs, model, target_mask=pred, steps=steps)
     elif atype == 'grad_x_input':
         return igrads.grad_x_input(inputs, model, target_mask=pred)
