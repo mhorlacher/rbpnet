@@ -25,8 +25,6 @@ from rbpnet import layers
 from rbpnet import losses
 from rbpnet import metrics
 from rbpnet import penalties
-from rbpnet import models
-from rbpnet import utils
 
 # %%
 # Custom layers
