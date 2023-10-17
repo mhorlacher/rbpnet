@@ -157,7 +157,7 @@ class TaskSpec:
 class DataSpec:
     def __init__(self, dataspec_yaml) -> None:
         with open(dataspec_yaml) as f:
-            dataspec_dict = yaml.load(f, yaml.CLoader)
+            dataspec_dict = yaml.load(f, yaml.FullLoader)
         
         self._fasta = dataspec_dict['fasta_file']
         
