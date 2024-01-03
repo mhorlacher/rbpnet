@@ -6,4 +6,4 @@ task_specs:
     main:
       - signal/PTBP1_HepG2/eCLIP/counts.pos.bw # plus-strand bigWig
       - signal/PTBP1_HepG2/eCLIP/counts.neg.bw # minus-strand bigWig
-    peaks: peaks/PTBP1_HepG2/peaks.crosslink.chr19.bed # single-nucleotide positions
+    peaks: PTBP1_HepG2.enriched-windows.300nt.bed # 300nt intervals

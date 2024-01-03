@@ -9,4 +9,4 @@ task_specs:
     control:
       - signal/PTBP1_HepG2/control/counts.pos.bw
       - signal/PTBP1_HepG2/control/counts.neg.bw
-    peaks: peaks/PTBP1_HepG2/peaks.crosslink.chr19.bed # single-nucleotide positions
+    peaks: PTBP1_HepG2.enriched-windows.bed # single-nucleotide positions
