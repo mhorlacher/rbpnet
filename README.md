@@ -116,3 +116,8 @@ chr8	38262758	+	C	A
 chr9	83969990	-	A	C
 ```
 
+---
+
+## Pre-trained Models
+
+Trained models are available at https://zenodo.org/records/10185223. 
